@@ -24,9 +24,9 @@ async function main() {
     update: {},
     create: {
       id: "default",
-      seasonName: "Hiver 2025-2026",
-      openingDate: "2025-12-06",
-      closingDate: "2026-04-12",
+      seasonName: "Hiver 2026-2027",
+      openingDate: "2026-12-05",
+      closingDate: "2027-04-18",
       openTime: "09:00",
       closeTime: "16:30",
       closedWeekdays: "[]",
