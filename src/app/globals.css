@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #061018;
+  --ink-soft: #0d1f2a;
+  --snow: #f4f8fb;
+  --mist: #c5d4de;
+  --steel: #7a93a3;
+  --ice: #2ee6a6;
+  --ice-deep: #1ab884;
+  --glacier: #9fd6ff;
+  --danger: #ff6b6b;
+  --background: var(--snow);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-snow: var(--snow);
+  --color-mist: var(--mist);
+  --color-steel: var(--steel);
+  --color-ice: var(--ice);
+  --color-ice-deep: var(--ice-deep);
+  --color-glacier: var(--glacier);
+  --color-danger: var(--danger);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--ice) 55%, white);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), Impact, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.alpine-gradient {
+  background:
+    radial-gradient(120% 80% at 70% 10%, rgba(159, 214, 255, 0.28), transparent 55%),
+    radial-gradient(90% 70% at 10% 80%, rgba(46, 230, 166, 0.18), transparent 50%),
+    linear-gradient(165deg, #041018 0%, #0b2433 42%, #123447 72%, #1a4658 100%);
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.ridge {
+  clip-path: polygon(0 35%, 8% 28%, 16% 38%, 28% 18%, 40% 32%, 52% 12%, 64% 30%, 76% 8%, 88% 26%, 100% 14%, 100% 100%, 0 100%);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--ice);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 10px 30px rgba(46, 230, 166, 0.25);
+}
+
+.btn-primary:hover {
+  background: #57f0ba;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid color-mix(in oklab, white 35%, transparent);
+  color: white;
+  font-weight: 600;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-ghost:hover {
+  background: color-mix(in oklab, white 10%, transparent);
+  border-color: color-mix(in oklab, white 60%, transparent);
+}
+
+.admin-shell {
+  background: #f0f4f7;
+  color: var(--ink);
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #cfd9e1;
+  background: white;
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: var(--ice-deep);
+  box-shadow: 0 0 0 3px rgba(46, 230, 166, 0.2);
+}
+
+.label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #405564;
+  margin-bottom: 0.35rem;
+}

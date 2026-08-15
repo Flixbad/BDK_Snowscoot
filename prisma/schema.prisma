@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Offer {
+  id               String    @id @default(cuid())
+  name             String
+  slug             String    @unique
+  description      String
+  shortDescription String
+  priceCents       Int
+  durationMinutes  Int
+  maxParticipants  Int       @default(6)
+  minAge           Int?
+  includes         String    @default("[]")
+  active           Boolean   @default(true)
+  featured         Boolean   @default(false)
+  sortOrder        Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  bookings         Booking[]
+}
+
+model SeasonSettings {
+  id                   String   @id @default("default")
+  seasonName           String   @default("Hiver 2025-2026")
+  openingDate          String
+  closingDate          String
+  openTime             String   @default("09:00")
+  closeTime            String   @default("16:30")
+  closedWeekdays       String   @default("[]")
+  slotDurationMinutes  Int      @default(120)
+  maxBookingsPerSlot   Int      @default(4)
+  meetingPoint         String   @default("Crans-Montana — domaine skiable")
+  contactEmail         String   @default("hello@bdk-snowscoot.ch")
+  contactPhone         String   @default("+41 00 000 00 00")
+  infoText             String   @default("Paiement sur place. Réservation confirmée par e-mail.")
+  isOpen               Boolean  @default(true)
+  updatedAt            DateTime @updatedAt
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  offerId       String
+  offer         Offer         @relation(fields: [offerId], references: [id])
+  date          String
+  timeSlot      String
+  customerName  String
+  customerEmail String
+  customerPhone String
+  participants  Int           @default(1)
+  notes         String?
+  status        String        @default("PENDING")
+  paymentMethod String        @default("ON_SITE")
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([date, timeSlot])
+  @@index([status])
+}
